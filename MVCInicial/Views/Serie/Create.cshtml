@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MarcaID, "MarcaID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("MarcaID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("MarcaID", "Selecciona Marca")
                 @Html.ValidationMessageFor(model => model.MarcaID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,6 +33,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Ir a insertar marcas", "Index", "Marca")
             </div>
         </div>
     </div>

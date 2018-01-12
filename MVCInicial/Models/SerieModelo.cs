@@ -10,7 +10,8 @@ namespace MVCInicial.Models
     { 
         public int ID { get; set; }
         public string Nom_serie { get; set; }
-        public int MarcaID { get; set; }
+        public int? MarcaID { get; set; }
+        //int? para permitir valores nulos por ejemplo si no metes marca
       //  [ForeignKey("MarcaModelo")]
         public MarcaModelo Marca{ get; set; }
     }
