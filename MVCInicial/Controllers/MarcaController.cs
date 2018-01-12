@@ -12,12 +12,17 @@ namespace MVCInicial.Controllers
         // GET: Marca
         public ActionResult Index()
         {
+
             return View();
         }
 
         // GET: Marca/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Desplegable()
         {
+            Context bd = new Context();
+            ViewBag.Marcas = new SelectList(bd.Marcas, "Id", "Nom_marca");
+            ViewBag.Marcas1 = bd.Marcas.ToList(); //tolist te devueve el contenido de una tabla en una lista
+           bd.SaveChanges();
             return View();
         }
 
