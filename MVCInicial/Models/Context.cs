@@ -8,7 +8,8 @@ namespace MVCInicial.Models
 {
     public class Context : DbContext
     {     
-        public DbSet<MarcaModelo> Marcas { get; set; }       
+        public DbSet<MarcaModelo> Marcas { get; set; }
+        public DbSet<SerieModelo> Series { get; set; }
     }
 
 }
