@@ -203,6 +203,8 @@
     <Content Include="Views\Serie\Create.cshtml" />
     <Content Include="Views\Vehiculo\Create.cshtml" />
     <Content Include="Views\Vehiculo\Index.cshtml" />
+    <Content Include="Views\Vehiculo\BuscarVehiculos.cshtml" />
+    <Content Include="Views\Vehiculo\BuscarPorDespelgable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

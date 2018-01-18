@@ -15,24 +15,36 @@ namespace MVCInicial.Controllers
         // GET: Vehiculo
         public ActionResult Index()
         {
-            var vehiculos =bd.Vehiculos.Include(x =>  x.Serie);
-
+            ViewBag.cualquiera = bd.Marcas.ToList();
+            var vehiculos = bd.Vehiculos.Include(x => x.Serie);
             return View(vehiculos.ToList());
         }
 
         // GET: Vehiculo/Details/
-        public ActionResult Details(int id)
+        public ActionResult BuscarVehiculos(String busqueda = "")//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
         {
+        
+            var lista = (from p in bd.Vehiculos.Include(x => x.Serie) where p.Matricula.Contains(busqueda) select p).ToList();//p.matricul.contains es como cuando hacemos el == de busqueda que sera la matricula que le pasemos          
+                                                                                                        //el in es para llamar el bd. vehiculos le ponemos el in y se le llamara a partir de ahora p//var es un obajeto que se le pasa lo que se da la gana ..depende de lo que le pases sera eso... por ejemplo le pasas una lista y es una lista
 
-            return View();
+
+            return View(lista);
+        }
+
+        public ActionResult BuscarPorDespelgable(String laMatricula = "")//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
+        {
+            ViewBag.laMatricula = new SelectList(bd.Vehiculos, "Matricula", "Matricula");
+            var lista = (from p in bd.Vehiculos.Include(x => x.Serie) where p.Matricula.Equals(laMatricula) select p).ToList();
+
+            return View(lista);
         }
 
         // GET: Vehiculo/Create
         public ActionResult Create()
         {
 
-            ViewBag.SerieID = new SelectList(bd.Series,"ID", "Nom_serie");//en el desplegable nos tiene que salir las series vectra corsa... para elegir
-           
+            ViewBag.SerieID = new SelectList(bd.Series, "ID", "Nom_serie");//en el desplegable nos tiene que salir las series vectra corsa... para elegir
+
             return View();
         }
 
@@ -97,5 +109,5 @@ namespace MVCInicial.Controllers
                 return View();
             }
         }
-    }
+    }  
 }
