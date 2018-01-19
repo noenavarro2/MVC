@@ -69,16 +69,24 @@ namespace MVCInicial.Controllers
         // GET: Vehiculo/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            VehiculoModelo vehiculo = bd.Vehiculos.Find(id);
+            ViewBag.SerieID = new SelectList(bd.Series, "ID", "Nom_serie", vehiculo.SerieID);
+            
+          
+            return View(vehiculo);
         }
 
         // POST: Vehiculo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, VehiculoModelo vehiculo)
         {
             try
             {
-                // TODO: Add update logic here
+                VehiculoModelo vehActualizar = bd.Vehiculos.SingleOrDefault(x => x.ID == id);
+                vehActualizar.Matricula = vehiculo.Matricula;
+                vehActualizar.Color= vehiculo.Color;
+                vehActualizar.SerieID = vehiculo.SerieID;
+                bd.SaveChanges();
 
                 return RedirectToAction("Index");
             }
