@@ -206,6 +206,9 @@
     <Content Include="Views\Vehiculo\BuscarVehiculos.cshtml" />
     <Content Include="Views\Vehiculo\BuscarPorDespelgable.cshtml" />
     <Content Include="Views\Vehiculo\Edit.cshtml" />
+    <Content Include="Views\Vehiculo\Details.cshtml" />
+    <Content Include="Views\Vehiculo\Delete.cshtml" />
+    <Content Include="Views\Marca\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,7 @@ namespace MVCInicial.Controllers
 {
     public class MarcaController : Controller
     {
+        Context bd = new Context();
         // GET: Marca
         public ActionResult Index()
         {
@@ -19,7 +20,7 @@ namespace MVCInicial.Controllers
         // GET: Marca/Details/5
         public ActionResult Desplegable()
         {
-            Context bd = new Context();
+            
             ViewBag.Marcas = new SelectList(bd.Marcas, "Id", "Nom_marca");
             ViewBag.Marcas1 = bd.Marcas.ToList(); //tolist te devueve el contenido de una tabla en una lista
            bd.SaveChanges();
@@ -94,6 +95,12 @@ namespace MVCInicial.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult List()
+        {
+            List<MarcaModelo> marcas = bd.Marcas.ToList();
+            
+            return View(marcas);
         }
     }
 }

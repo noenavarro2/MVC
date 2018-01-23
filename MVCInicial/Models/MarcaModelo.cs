@@ -9,5 +9,6 @@ namespace MVCInicial.Models
     {
         public int ID{ get; set; }
         public string Nom_marca { get; set; }
+        public List<SerieModelo> SeriesLista{ get; set; }
     }
 }

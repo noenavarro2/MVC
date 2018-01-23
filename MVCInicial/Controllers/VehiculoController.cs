@@ -30,6 +30,14 @@ namespace MVCInicial.Controllers
 
             return View(lista);
         }
+        public ActionResult Details(int id)//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
+        {
+            ViewBag.cualquiercosa = bd.Marcas.ToList();
+            VehiculoModelo vehiculo = bd.Vehiculos.Include(x => x.Serie).FirstOrDefault(v => v.ID == id);
+
+
+            return View(vehiculo);
+        }
 
         public ActionResult BuscarPorDespelgable(String laMatricula = "")//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
         {
@@ -99,7 +107,9 @@ namespace MVCInicial.Controllers
         // GET: Vehiculo/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ViewBag.cualquiercosa = bd.Marcas.ToList();
+            VehiculoModelo vehiculo = bd.Vehiculos.Include(x => x.Serie).FirstOrDefault(v => v.ID == id);
+            return View(vehiculo);
         }
 
         // POST: Vehiculo/Delete/5
@@ -108,7 +118,10 @@ namespace MVCInicial.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                VehiculoModelo vehiculo = bd.Vehiculos.FirstOrDefault(v => v.ID == id);
+                bd.Vehiculos.Remove(vehiculo);
+                bd.SaveChanges();
+
 
                 return RedirectToAction("Index");
             }
