@@ -129,7 +129,7 @@ namespace MVCInicial.Controllers
             }
         }
         // GET: Vehiculo/List/5
-        public ActionResult Listado2(int idMarca = 1, int idSerie = 0)//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
+        public ActionResult Listado2(int idMarca = 1, int idSerie = 0)
         {
             
             ViewBag.idMarca = new SelectList(bd.Marcas, "ID", "Nom_marca");
@@ -137,6 +137,23 @@ namespace MVCInicial.Controllers
             var vehiculos = bd.Vehiculos.Where(x => x.SerieID == idSerie );
 
             return View(vehiculos.ToList());
+        }
+        // GET: Vehiculo/List/5
+        public ActionResult Listado3()
+        {
+           // Context bd = new Context();
+
+
+            var lista = bd.Database.SqlQuery<VehiculoTotal>("getSeriesVehiculos").ToList();
+
+            return View(lista);
+        }
+        public class VehiculoTotal
+        {
+            public string Nom_marca { get; set; }
+            public string Nom_serie { get; set; }
+            public string Matricula { get; set; }
+            public string color { get; set; }
         }
     }  
 }
