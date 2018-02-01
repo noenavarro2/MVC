@@ -121,14 +121,22 @@ namespace MVCInicial.Controllers
                 VehiculoModelo vehiculo = bd.Vehiculos.FirstOrDefault(v => v.ID == id);
                 bd.Vehiculos.Remove(vehiculo);
                 bd.SaveChanges();
-
-
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+        // GET: Vehiculo/List/5
+        public ActionResult Listado2(int idMarca = 1, int idSerie = 0)//si a busqueda no le pasas ningun parametro busca toma "" y si si le pasas 
+        {
+            
+            ViewBag.idMarca = new SelectList(bd.Marcas, "ID", "Nom_marca");
+            ViewBag.IdSerie = new SelectList(bd.Series.Where(x => x.MarcaID == idMarca), "ID", "Nom_serie");
+            var vehiculos = bd.Vehiculos.Where(x => x.SerieID == idSerie );
+
+            return View(vehiculos.ToList());
         }
     }  
 }

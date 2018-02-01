@@ -9,10 +9,12 @@ namespace MVCInicial.Controllers
 {
     public class SerieController : Controller
     {
+        Context bd = new Context();
         // GET: Serie
         public ActionResult Index()
         {
           
+
             return View();
         }
        
@@ -21,6 +23,18 @@ namespace MVCInicial.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+        // GET: Serie/Details/5
+        //public ActionResult List()
+        //{
+          //  List<SerieModelo> series = bd.Series.ToList();
+            //return View(series);
+        //}
+        // GET: Serie/List/5
+        public ActionResult List(int serieID)
+        {
+            var series = bd.Series.Include("VehiculosList").Single(ser => ser.ID == serieID);
+            return View(series);
         }
 
         // GET: Serie/Create

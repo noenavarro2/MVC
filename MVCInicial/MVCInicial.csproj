@@ -209,6 +209,8 @@
     <Content Include="Views\Vehiculo\Details.cshtml" />
     <Content Include="Views\Vehiculo\Delete.cshtml" />
     <Content Include="Views\Marca\List.cshtml" />
+    <Content Include="Views\Serie\List.cshtml" />
+    <Content Include="Views\Vehiculo\Listado2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
