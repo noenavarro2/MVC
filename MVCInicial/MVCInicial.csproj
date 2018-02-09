@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\SerieController.cs" />
@@ -155,10 +156,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClienteModelo.cs" />
     <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\ExtraModelo.cs" />
     <Compile Include="Models\MarcaModelo.cs" />
     <Compile Include="Models\SerieModelo.cs" />
     <Compile Include="Models\VehiculoModelo.cs" />
+    <Compile Include="Models\VehiculosExtrasModelo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +216,11 @@
     <Content Include="Views\Serie\List.cshtml" />
     <Content Include="Views\Vehiculo\Listado2.cshtml" />
     <Content Include="Views\Vehiculo\Listado3.cshtml" />
+    <Content Include="Views\Vehiculo\ListadoPorColor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cliente\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

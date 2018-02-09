@@ -15,6 +15,10 @@ namespace MVCInicial.Models
         public int SerieID { get; set; }
 
 
+        //items para el listbox
+        public List<int> ExtrasSeleccionados { get; set; }//examen seguro 
+        public List<VehiculosExtrasModelo> VehiculoExtras { get; set; }
+
 
 
     }

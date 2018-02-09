@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVCInicial.Models;
 using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace MVCInicial.Controllers
 {
@@ -138,12 +139,17 @@ namespace MVCInicial.Controllers
 
             return View(vehiculos.ToList());
         }
+        //get Color
+        public ActionResult ListadoPorColor(string color="")//si no recibe nada es ""
+        {
+            ViewBag.color = new SelectList(bd.Vehiculos.Select(x => new { Color = x.Color}).Distinct(), "Color", "Color");//consulta de select,value , y text
+
+            var lista = bd.Database.SqlQuery<VehiculoTotal>("getVehiculosPorColor @ColorSel",new SqlParameter("@ColorSel",color)).ToList();//voy a llamar a getvehiculosporcolor a traves de colorsell de procedures del sql server
+            return View(lista);
+        }
         // GET: Vehiculo/List/5
         public ActionResult Listado3()
         {
-           // Context bd = new Context();
-
-
             var lista = bd.Database.SqlQuery<VehiculoTotal>("getSeriesVehiculos").ToList();
 
             return View(lista);
@@ -155,5 +161,6 @@ namespace MVCInicial.Controllers
             public string Matricula { get; set; }
             public string color { get; set; }
         }
-    }  
+    }
+  
 }

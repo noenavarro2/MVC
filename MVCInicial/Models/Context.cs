@@ -11,6 +11,8 @@ namespace MVCInicial.Models
         public DbSet<MarcaModelo> Marcas { get; set; }
         public DbSet<SerieModelo> Series { get; set; }
         public DbSet<VehiculoModelo> Vehiculos { get; set; }
+        public DbSet<ExtraModelo> Extras { get; set; }
+        public DbSet<VehiculosExtrasModelo> VehiculosExtras { get; set; }
     }
 
 }
