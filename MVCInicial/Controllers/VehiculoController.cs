@@ -44,16 +44,14 @@ namespace MVCInicial.Controllers
         {
             ViewBag.laMatricula = new SelectList(bd.Vehiculos, "Matricula", "Matricula");
             var lista = (from p in bd.Vehiculos.Include(x => x.Serie) where p.Matricula.Equals(laMatricula) select p).ToList();
-
             return View(lista);
         }
 
         // GET: Vehiculo/Create
         public ActionResult Create()
         {
-
             ViewBag.SerieID = new SelectList(bd.Series, "ID", "Nom_serie");//en el desplegable nos tiene que salir las series vectra corsa... para elegir
-
+            ViewBag.ExtraList= new MultiSelectList(bd.Extras, "ID", "TipoExtra");
             return View();
         }
 
@@ -66,6 +64,13 @@ namespace MVCInicial.Controllers
                 bd.Vehiculos.Add(vehiculo);
                 bd.SaveChanges();
                 // TODO: Add insert logic here
+                foreach (var extraId in vehiculo.ExtrasSeleccionados)
+                {
+                   var obj = new VehiculosExtrasModelo() { vehiculoID = vehiculo.ID, extraID = extraId} ;
+                    bd.VehiculosExtras.Add(obj);
+                }
+                bd.SaveChanges();  
+                    
 
                 return RedirectToAction("Index");
             }
@@ -80,8 +85,10 @@ namespace MVCInicial.Controllers
         {
             VehiculoModelo vehiculo = bd.Vehiculos.Find(id);
             ViewBag.SerieID = new SelectList(bd.Series, "ID", "Nom_serie", vehiculo.SerieID);
-            
-          
+            vehiculo.ExtrasSeleccionados = bd.VehiculosExtras.Where(m => m.vehiculoID == vehiculo.ID).Select(m => m.extraID).ToList();
+          //  var lista = (from p in bd.VehiculosExtras where p.vehiculoID.Equals(id) select p.extraID).ToList();
+            ViewBag.ExtraList = new MultiSelectList(bd.Extras, "ID", "TipoExtra", vehiculo.ExtrasSeleccionados);//como 4 parametro se le pasan los elementos seleccionados 
+
             return View(vehiculo);
         }
 
@@ -91,10 +98,30 @@ namespace MVCInicial.Controllers
         {
             try
             {
+
                 VehiculoModelo vehActualizar = bd.Vehiculos.SingleOrDefault(x => x.ID == id);
                 vehActualizar.Matricula = vehiculo.Matricula;
-                vehActualizar.Color= vehiculo.Color;
+                vehActualizar.Color = vehiculo.Color;
                 vehActualizar.SerieID = vehiculo.SerieID;
+              
+                foreach (var extraId in vehiculo.ExtrasSeleccionados)
+                {
+                  // var vehelim = bd.FirstOrDefault(v => v.ID == id);
+                   // bd.Vehiculos.Remove(vehelim);
+                }
+               
+                bd.SaveChanges();
+
+                foreach (var extraId in vehiculo.ExtrasSeleccionados)
+                {
+                    //VehiculosExtrasModelo vehiculosExtrasactualizar
+                    var obj = new VehiculosExtrasModelo() { vehiculoID = vehiculo.ID, extraID = extraId };
+                    bd.VehiculosExtras.Add(obj);
+                }
+                bd.SaveChanges();
+
+
+
                 bd.SaveChanges();
 
                 return RedirectToAction("Index");
